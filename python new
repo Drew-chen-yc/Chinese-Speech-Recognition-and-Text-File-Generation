@@ -1,1 +1,56 @@
-print("Hello woeld!")
+import ffmpeg
+import torch
+import time
+import os
+import whisper
+import ctypes
+import os
+
+libc_path = "C:\\Windows\\System32\\msvcrt.dll"  # Standard C Library on Windows
+ctypes.CDLL(libc_path)
+
+# Loading Whisper model
+model = whisper.load_model("medium")  # choose "tiny", "base", "small", "medium", "large"
+
+# Setting ffmpeg pathway
+ffmpeg_path = r'C:\Users\kkiwi\AppData\Local\Programs\ffmpeg\bin'
+
+# Add the path to the environment variables
+os.environ["PATH"] += os.pathsep + ffmpeg_path
+
+# # checking
+
+print(os.environ["PATH"])
+
+file_path = r"C:\Users\kkiwi\OneDrive\桌面\OSU\soundtotext\CTBC2024Q4-1.mp3"
+
+print(torch.cuda.is_available())  # True indicates CUDA is available
+print(torch.version.cuda)  # check PyTorch support CUDA
+print(torch.backends.cudnn.enabled)  # check cuDNN is activate
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Using device: {device}")
+model = model.to(device)
+
+audio = whisper.load_audio(file_path)
+
+import subprocess
+
+
+file_path_1 = r"C:\Users\kkiwi\OneDrive\桌面\OSU\soundtotext\output_segment.mp3"
+
+start_time = time.time()
+
+# Read the audio file and convert it to text
+result = model.transcribe(file_path)  
+
+output_file = "test-2.txt"
+with open(output_file, "w", encoding="utf-8") as f:
+    f.write(result["text"])
+
+# Output the converted text
+print(result["text"])
+
+end_time = time.time()
+
+print(f"Total Runtime {end_time - start_time:.4f} s")
