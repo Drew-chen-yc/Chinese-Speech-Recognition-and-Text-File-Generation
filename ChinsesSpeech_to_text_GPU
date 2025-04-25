@@ -22,7 +22,7 @@ os.environ["PATH"] += os.pathsep + ffmpeg_path
 
 print(os.environ["PATH"])
 
-file_path = r"C:\Users\kkiwi\OneDrive\桌面\OSU\soundtotext\CTBC2024Q4-1.mp3"
+file_path = r"C:\Users\kkiwi\OneDrive\desktop\soundtotext\CTBC2024Q4-1.mp3"
 
 print(torch.cuda.is_available())  # True indicates CUDA is available
 print(torch.version.cuda)  # check PyTorch support CUDA
@@ -37,7 +37,7 @@ audio = whisper.load_audio(file_path)
 import subprocess
 
 
-file_path_1 = r"C:\Users\kkiwi\OneDrive\桌面\OSU\soundtotext\output_segment.mp3"
+file_path_1 = r"C:\Users\kkiwi\OneDrive\desktop\soundtotext\output_segment.mp3"
 
 start_time = time.time()
 
